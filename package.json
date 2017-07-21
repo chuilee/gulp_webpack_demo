@@ -1,0 +1,41 @@
+{
+  "name": "gulp_webpack",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
+    "public": "webpack --config ./webpack/webpack.config.js",
+    "dev": "webpack-dev-server --config ./webpack/webpack.dev.config.js"
+  },
+  "dependencies": {
+    "browser-sync": "^2.18.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-usemin": "^0.3.26",
+    "gulp-useref": "^3.1.2",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^7.1.1",
+    "babel-preset-latest": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "gulp-if": "^2.0.2",
+    "html-webpack-plugin": "^2.29.0",
+    "node-sass": "^4.5.3",
+    "webpack": "^3.3.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "keywords": [
+    "es6"
+  ],
+  "author": "Chuilee",
+  "license": "MIT",
+  "config": {}
+}
