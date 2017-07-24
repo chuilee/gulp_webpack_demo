@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack');
+const webpack = require('webpack')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 
 module.exports = {
   devtool: 'hidden-source-map',
@@ -11,7 +12,7 @@ module.exports = {
   },
   module: {
     noParse: function (content) {
-      return /jquery/.test(content);
+      return /jquery|lodash/.test(content);
     },
     rules: [{
       test: /\.jsx?$/,
@@ -21,7 +22,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'My App',
-      filename: '../index.html'
+      filename: '../index.html',
+      template: 'src/templates/index.html',
+      minify: {
+        minifyJS: true
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -31,6 +36,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-    })
+    }),
+    new HtmlWebpackHarddiskPlugin()
   ]
 }

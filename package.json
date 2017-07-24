@@ -26,8 +26,10 @@
     "babel-preset-latest": "^6.16.0",
     "babel-register": "^6.18.0",
     "gulp-if": "^2.0.2",
+    "html-webpack-harddisk-plugin": "^0.1.0",
     "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.3",
+    "pug-loader": "^2.3.0",
     "webpack": "^3.3.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.5.1"
