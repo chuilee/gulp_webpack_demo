@@ -27,6 +27,7 @@ x64/
 build/
 [Bb]in/
 [Oo]bj/
+dist/
 
 # --------------------
 # OSX Files

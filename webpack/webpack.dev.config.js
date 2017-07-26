@@ -10,7 +10,7 @@ module.exports = {
     page: path.resolve(__dirname, '../src/page.js')
   },
   output: {
-    filename: '[name].js',
+    filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, '../build')
   },
   module: {
@@ -20,15 +20,13 @@ module.exports = {
     rules: [{
       test: /\.jsx?$/,
       use: ['babel-loader']
-    }, {
-      test: /\.pug/,
-      use: ['pug-loader']
     }]
   },
   devServer: {
     hot: true, // 告诉 dev-server 我们在使用 HMR
     contentBase: path.resolve(__dirname, '../build'),
     compress: true,
+    inline: true,
     publicPath: '/',
     host: '0.0.0.0',
     port: 3000
@@ -36,8 +34,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: "common",
-      // (the commons chunk name)
-      filename: "common.js",
+      filename: "common.[hash:8].js",
       // minChunks: 3,
       // (Modules must be shared between 3 entries)
       chunks: ["index", "page"]
@@ -46,7 +43,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
       chunks: ['common','index'],
-      hash: true,
+      // hash: true,  
+      // 会给所有chunks js文件加上hash 例如:common.js?6bac23b8e7535c76edcf(这个不会经常变动,无需每次加上)
       title: 'index-My App',
       filename: 'index.html',
       template: 'src/templates/index.html'
@@ -54,7 +52,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
       chunks: ['common', 'page'],
-      hash: true,
+      // hash: true,
       title: 'page-My App',
       filename: 'page.html',
       template: 'src/templates/page.html'

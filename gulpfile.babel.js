@@ -2,60 +2,66 @@ const gulp = require('gulp')
 const server = require('browser-sync').create()
 const $ = require('gulp-load-plugins')()
 const path = require('path')
+const config = require('./config')
 
-gulp.task('server', () => {
+gulp.task('server', ['sass'], () => {
   server.init({
     server: {
-      baseDir: './'
+      baseDir: config.gulp.rootDir
     }
   })
 
-  gulp.watch('sass/*.scss', ['sass'])
-  gulp.watch(['index.html', 'scripts/*.js', 'css/*.css', 'images/*.*', 'pages/*.*']).on('change', server.reload)
+  gulp.watch(config.gulp.sassFiles, ['sass'])
+  gulp.watch([
+    config.gulp.rootFiles,
+    config.gulp.jsFiles,
+    config.gulp.cssFiles,
+    config.gulp.imgFiles
+  ]).on('change', server.reload)
 })
 
 gulp.task('sass', () => {
-  gulp.src('sass/*.scss')
-      .pipe($.sourcemaps.init())
-      .pipe($.sass())
-      .pipe($.autoprefixer({
-        browsers: ['> 1%', 'IE 8'],
-        cascade: false
-      }))
-      .pipe($.sourcemaps.write())
-      .pipe(gulp.dest(path.join(__dirname, 'css')))
-      .pipe($.rename({
-        extname: '.min.css'
-      }))
-      .pipe($.csso())
-      .pipe(gulp.dest(path.join(__dirname, 'css')))
-      .pipe(server.stream())
+  gulp.src(config.gulp.sassFiles)
+    .pipe($.sourcemaps.init())
+    .pipe($.sass())
+    .pipe($.autoprefixer({
+      browsers: ['> 1%', 'IE 8'],
+      cascade: false
+    }))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest(config.gulp.cssDir))
+    .pipe($.rename({
+      extname: '.min.css'
+    }))
+    .pipe($.csso())
+    .pipe(gulp.dest(config.gulp.cssDir))
+    .pipe(server.stream())
 })
 
-gulp.task('usemin', ()=>{
-  gulp.src('./index.html')
+gulp.task('usemin', () => {
+  gulp.src([config.gulp.rootFiles, config.gulp.pageFiles])
     .pipe($.useref())
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.csso()))
-    .pipe(gulp.dest('build/'))
+    .pipe(gulp.dest(config.dist))
 })
 
 gulp.task('clean', () => {
-  gulp.src('./build/*')
+  gulp.src(path.resolve(config.dist, '**/*.*'))
     .pipe($.clean());
 })
 
 gulp.task('imagemin', () => {
-  gulp.src('./images/*.*')
+  gulp.src(config.gulp.imgFiles)
     .pipe($.imagemin())
-    .pipe(gulp.dest('./build/images'))
+    .pipe(gulp.dest(path.resolve(config.dist, 'assets/images')))
 })
 
 gulp.task('buildServer', ['clean', 'usemin', 'imagemin'], () => {
   server.init({
     port: 3030,
     server: {
-      baseDir: './build'
+      baseDir: config.dist
     }
   })
 })

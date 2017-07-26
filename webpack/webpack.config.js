@@ -1,18 +1,20 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 
 module.exports = {
   devtool: 'hidden-source-map',
-  entry: path.resolve(__dirname, '../src/index.js'),
+  entry: {
+    index: path.resolve(__dirname, '../src/index.js'),
+    page: path.resolve(__dirname, '../src/page.js')
+  },
   output: {
-    filename: 'bundle.[hash].js',
-    path: path.resolve(__dirname, '../build/js')
+    filename: '[name].[hash:8].js',
+    path: path.resolve(__dirname, '../build/js/')
   },
   module: {
     noParse: function (content) {
-      return /jquery|lodash/.test(content);
+      return /jquery/.test(content);
     },
     rules: [{
       test: /\.jsx?$/,
@@ -20,10 +22,25 @@ module.exports = {
     }]
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "common",
+      filename: "common.[hash:8].js",
+      chunks: ["index", "page"]
+    }),
     new HtmlWebpackPlugin({
+      chunks: ['common', 'page'],
       title: 'My App',
       filename: '../index.html',
       template: 'src/templates/index.html',
+      minify: {
+        minifyJS: true
+      }
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['common', 'page'],
+      title: 'page-My App',
+      filename: '../page.html',
+      template: 'src/templates/page.html',
       minify: {
         minifyJS: true
       }
@@ -36,7 +53,6 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-    }),
-    new HtmlWebpackHarddiskPlugin()
+    })
   ]
 }

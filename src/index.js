@@ -1,8 +1,8 @@
 import _findKey from 'lodash/findKey'
 
 let users = {
-  'barney':  { 'age': 316, 'active': true },
-  'fred':    { 'age': 40, 'active': false },
+  'barney':  { 'age': 31, 'active': true },
+  'fred':    { 'age': 41, 'active': false },
   'pebbles': { 'age': 1,  'active': true }
 }
 
