@@ -1,0 +1,11 @@
+"use strict";
+
+var a = 1,
+    b = 2,
+    c = void 0,
+    d = void 0;
+c = a + b;
+d = c + a;
+
+console.log(c, d);
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QuanMiXSwibmFtZXMiOlsiYSIsImIiLCJjIiwiZCIsImNvbnNvbGUiLCJsb2ciXSwibWFwcGluZ3MiOiI7O0FBQ0EsSUFBSUEsSUFBSSxDQUFSO0FBQUEsSUFDSUMsSUFBSSxDQURSO0FBQUEsSUFFSUMsVUFGSjtBQUFBLElBR0lDLFVBSEo7QUFJQUQsSUFBSUYsSUFBSUMsQ0FBUjtBQUNBRSxJQUFJRCxJQUFJRixDQUFSOztBQUVBSSxRQUFRQyxHQUFSLENBQVlILENBQVosRUFBZUMsQ0FBZiIsImZpbGUiOiJ0ZXN0LmpzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbmxldCBhID0gMSxcclxuICAgIGIgPSAyLFxyXG4gICAgYyxcclxuICAgIGRcclxuYyA9IGEgKyBiXHJcbmQgPSBjICsgYVxyXG5cclxuY29uc29sZS5sb2coYywgZCkiXX0=
