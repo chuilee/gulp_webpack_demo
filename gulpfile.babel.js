@@ -1,8 +1,8 @@
 const gulp = require('gulp')
 const server = require('browser-sync').create()
 const $ = require('gulp-load-plugins')()
-const path = require('path')
 const config = require('./config')
+const del = require('del')
 
 gulp.task('server', ['sass'], () => {
   server.init({
@@ -43,7 +43,7 @@ gulp.task('sass', () => {
 })
 
 // 编译js
-gulp.task('babel', ()=>{
+gulp.task('babel', () => {
   gulp.src(config.gulp.jsSrcFiles)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -56,47 +56,46 @@ gulp.task('babel', ()=>{
 })
 
 // md5 给html下的js, css 增加hash
-gulp.task('md5_css', ['clean', 'usemin'], ()=>{
+gulp.task('md5_css', () => {
   gulp.src(config.dist.cssFiles)
     .pipe($.plumber())
     .pipe($.md5Plus(10, [config.dist.rootFiles]))
     .pipe(gulp.dest(config.dist.cssDir))
 })
 
-gulp.task('md5_js', ['clean', 'usemin'], ()=>{
+gulp.task('md5_js', () => {
   gulp.src(config.dist.jsFiles)
     .pipe($.plumber())
     .pipe($.md5Plus(10, [config.dist.rootFiles]))
     .pipe(gulp.dest(config.dist.jsDir))
 })
 
-gulp.task('md5_img', ['clean', 'usemin'], ()=>{
+gulp.task('md5_img', () => {
   gulp.src(config.dist.imgFiles)
     .pipe($.plumber())
     .pipe($.md5Plus(10, [config.dist.rootFiles]))
     .pipe(gulp.dest(config.dist.imgDir))
 })
 
-gulp.task('md5', ['md5_css', 'md5_js', 'md5_img'])
-
-gulp.task('usemin', ['clean'], () => {  // gulp-concat 文件合并
-  gulp.src([config.gulp.rootFiles, config.gulp.pageFiles])
-    .pipe($.plumber())
-    .pipe($.useref())
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.csso()))
-    .pipe(gulp.dest(config.dist.rootDir))
+gulp.task('md5', ['usemin'], () => {
+  gulp.start(['md5_css', 'md5_js', 'md5_img'])
 })
 
-gulp.task('clean', () => {  // 注意 只能删除目录下的文件,不能删除子目录 
-  gulp.src([config.dist.rootFiles, 
-    config.dist.cssFiles, 
-    config.dist.imgFiles, 
-    config.dist.jsFiles], {read: false})
-    .pipe($.clean({force: true}));
+gulp.task('usemin', ['clean'], () => {
+  return gulp.src([config.gulp.rootFiles, config.gulp.pageFiles])
+        .pipe($.plumber())
+        .pipe($.useref())
+        .pipe($.if('*.js', $.uglify()))
+        .pipe($.if('*.css', $.csso()))
+        .pipe(gulp.dest(config.dist.rootDir))
 })
 
-gulp.task('imagemin',['usemin'], () => {
+gulp.task('clean', () => {
+  return gulp.src([config.dist.rootDir])
+        .pipe($.clean())
+})
+
+gulp.task('imagemin', () => {
   gulp.src(config.gulp.imgFiles)
     .pipe($.plumber())
     .pipe($.imagemin())

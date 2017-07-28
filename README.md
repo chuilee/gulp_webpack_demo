@@ -18,3 +18,17 @@
 ### webpack
 
 ### Glup
+---
+*     gulp.task("a", function() {
+        gulp.src("....
+    与
+     
+      gulp.task("b", function() {
+        return gulp.src("....
+
+    的区别, gulp中task都是异步执行,有return的情况下,可以保证task在依赖的task执行成功后再运行
+    
+      gulp.task('c', ['a', 'b'], ()=>{
+        // a may not done
+        // b done
+      })
