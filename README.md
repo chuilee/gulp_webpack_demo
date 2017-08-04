@@ -17,7 +17,8 @@
 
 ### webpack
 #### hash 与 chunkhash 的区别
-> hash是compilation对象计算所得，而不是具体的项目文件计算所得; chunkhash是根据具体模块文件的内容计算所得的hash值，所以某个文件的改动只会影响它本身的hash指纹，不会影响其他文件; contenthash 的使用方式; [链接地址]('http://www.cnblogs.com/ihardcoder/p/5623411.html')
+> hash是compilation对象计算所得，而不是具体的项目文件计算所得; chunkhash是根据具体模块文件的内容计算所得的hash值，所以某个文件的改动只会影响它本身的hash指纹，不会影响其他文件; contenthash 的使用方式; 
+[链接地址]('http://www.cnblogs.com/ihardcoder/p/5623411.html')
 
 ### Glup
 ---
