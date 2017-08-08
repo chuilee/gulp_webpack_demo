@@ -2,7 +2,11 @@ const gulp = require('gulp')
 const server = require('browser-sync').create()
 const $ = require('gulp-load-plugins')()
 const config = require('./config')
-const del = require('del')
+// const del = require('del')
+const webpackStream = require('webpack-stream')
+const webpackConfig = require('./webpack/webpack.config')
+const webpack = require('webpack')
+const path = require('path')
 
 gulp.task('server', ['sass'], () => {
   server.init({
@@ -24,7 +28,7 @@ gulp.task('server', ['sass'], () => {
 
 // 编译sass
 gulp.task('sass', () => {
-  gulp.src(config.gulp.sassFiles)
+  return gulp.src(config.gulp.sassFiles)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass())
@@ -81,18 +85,19 @@ gulp.task('md5', ['usemin'], () => {
   gulp.start(['md5_css', 'md5_js', 'md5_img'])
 })
 
+// 合并js, css文件
 gulp.task('usemin', ['clean'], () => {
   return gulp.src([config.gulp.rootFiles, config.gulp.pageFiles])
-        .pipe($.plumber())
-        .pipe($.useref())
-        .pipe($.if('*.js', $.uglify()))
-        .pipe($.if('*.css', $.csso()))
-        .pipe(gulp.dest(config.dist.rootDir))
+    .pipe($.plumber())
+    .pipe($.useref())
+    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('*.css', $.csso()))
+    .pipe(gulp.dest(config.dist.rootDir))
 })
 
 gulp.task('clean', () => {
   return gulp.src([config.dist.rootDir])
-        .pipe($.clean())
+    .pipe($.clean())
 })
 
 gulp.task('imagemin', () => {
@@ -114,3 +119,23 @@ gulp.task('buildServer', ['imagemin', 'md5'], () => {
 gulp.task('default', ['server'])
 
 gulp.task('build', ['buildServer'])
+
+/* gulp webpack */
+gulp.task('gWebpack', ['webpack'], () => {
+  server.init({
+    server: {
+      baseDir: config.build.rootDir
+    }
+  })
+
+  gulp.watch(config.webpack.srcFiles, ['webpack'])
+  gulp.watch([
+    config.build.allFiles
+  ]).on('change', server.reload)
+})
+
+gulp.task('webpack', () => {
+  return gulp.src('./src/index.js')
+        .pipe(webpackStream(webpackConfig, webpack))  // webpack@3
+        .pipe(gulp.dest(path.join(config.build.rootDir, 'js/')))
+})

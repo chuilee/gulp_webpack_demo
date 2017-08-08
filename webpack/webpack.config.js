@@ -28,7 +28,7 @@ module.exports = {
       chunks: ["index", "page"]
     }),
     new HtmlWebpackPlugin({
-      chunks: ['common', 'page'],
+      chunks: ['common', 'index'],
       title: 'My App',
       filename: '../index.html',
       template: 'src/templates/index.html',
