@@ -20,6 +20,9 @@ module.exports = {
     rules: [{
       test: /\.jsx?$/,
       use: ['babel-loader']
+    }, {
+      test: /\.pug$/,
+      use: ['pug-loader']
     }]
   },
   devServer: {
@@ -42,12 +45,12 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(), // 启用 HMR
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
-      chunks: ['common','index'],
+      chunks: ['common', 'index'],
       // hash: true,  
       // 会给所有chunks js文件加上hash 例如:common.js?6bac23b8e7535c76edcf(这个不会经常变动,无需每次加上)
       title: 'index-My App',
       filename: 'index.html',
-      template: 'src/templates/index.html'
+      template: 'src/templates/main.pug'
     }),
     new HtmlWebpackPlugin({
       alwaysWriteToDisk: true,
