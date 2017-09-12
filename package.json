@@ -18,7 +18,13 @@
     "gulp-load-plugins": "^1.4.0",
     "gulp-usemin": "^0.3.26",
     "gulp-useref": "^3.1.2",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "html-webpack-harddisk-plugin": "^0.1.0",
+    "html-webpack-plugin": "^2.29.0",
+    "webpack": "^3.3.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-dev-server": "^2.5.1",
+    "webpack-stream": "^3.2.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -28,6 +34,9 @@
     "babel-preset-latest": "^6.16.0",
     "babel-register": "^6.18.0",
     "del": "^3.0.0",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0",
     "gulp-babel": "^6.1.2",
     "gulp-csso": "^3.0.0",
     "gulp-if": "^2.0.2",
@@ -39,16 +48,10 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^3.0.0",
     "html-loader": "^0.5.0",
-    "html-webpack-harddisk-plugin": "^0.1.0",
-    "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.3",
     "pug": "^2.0.0-rc.3",
     "pug-html-loader": "^1.1.5",
-    "pug-loader": "^2.3.0",
-    "webpack": "^3.3.0",
-    "webpack-dev-middleware": "^1.11.0",
-    "webpack-dev-server": "^2.5.1",
-    "webpack-stream": "^3.2.0"
+    "pug-loader": "^2.3.0"
   },
   "keywords": [
     "es6"
