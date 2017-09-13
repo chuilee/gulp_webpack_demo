@@ -44,8 +44,22 @@ gulp.task('sass', () => gulp.src(config.gulp.sassFiles)
   .pipe(gulp.dest(config.gulp.cssDir))
   .pipe(server.stream()));
 
+// eslint检查代码
+gulp.task('eslint', () => {
+  gulp.src(config.gulp.jsSrcFiles)
+    .pipe($.plumber())
+    .pipe($.eslint({
+      configFile: './.eslintrc',
+      useEslintrc: false,
+      quiet: true,
+      fix: true,
+    }))
+    .pipe($.eslint.format())
+    .pipe($.eslint.failAfterError());
+});
+
 // 编译js
-gulp.task('babel', () => {
+gulp.task('babel', ['eslint'], () => {
   gulp.src(config.gulp.jsSrcFiles)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -91,9 +105,11 @@ gulp.task('usemin', ['clean'], () => gulp.src([config.gulp.rootFiles, config.gul
   .pipe($.if('*.css', $.csso()))
   .pipe(gulp.dest(config.dist.rootDir)));
 
+// 清除目录下文件
 gulp.task('clean', () => gulp.src([config.dist.rootDir])
   .pipe($.clean()));
 
+// 压缩图片
 gulp.task('imagemin', () => {
   gulp.src(config.gulp.imgFiles)
     .pipe($.plumber())

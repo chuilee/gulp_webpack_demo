@@ -1,8 +1,9 @@
-const path = require('path')
+const path = require('path');
+
 module.exports = {
   build: {
     rootDir: path.resolve(__dirname, '../build'),
-    allFiles: path.resolve(__dirname, '../build', '**/*.*')
+    allFiles: path.resolve(__dirname, '../build', '**/*.*'),
   },
   dist: {
     rootDir: path.resolve(__dirname, '../dist'),
@@ -25,10 +26,10 @@ module.exports = {
     sassFiles: path.resolve(__dirname, '../examples/assets/sass', '*.scss'),
     jsFiles: path.resolve(__dirname, '../examples/assets/js', '*.js'),
     jsSrcFiles: path.resolve(__dirname, '../examples/src/js', '*.js'),
-    imgFiles: path.resolve(__dirname, '../examples/assets/images', '*.*')
+    imgFiles: path.resolve(__dirname, '../examples/assets/images', '*.*'),
   },
   webpack: {
     src: path.resolve(__dirname, '../src'),
-    srcFiles: path.resolve(__dirname, '../src', '**/*.*')
-  }
-}
+    srcFiles: path.resolve(__dirname, '../src', '**/*.*'),
+  },
+};

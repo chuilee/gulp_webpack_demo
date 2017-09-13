@@ -4,18 +4,18 @@ function init() {
   $video.addEventListener("loadedmetadata", (data) => {
     console.warn('============loadedmetadata==========')
     console.log(data)
-  }, true);
+  }, true)
 
   $video.addEventListener("loadeddata", (data) => {
     console.warn('============loadeddata==========')
     console.log(data)
-  }, true);
+  }, true)
 
   $video.addEventListener("seeked", function () {
     console.warn('============seeked==========')
-    // $video.play();
-  }, true);
-  $video.currentTime = 40.0;
+    // $video.play()
+  }, true)
+  $video.currentTime = 40.0
 
   $video.addEventListener('loadstart', (data) => {
     console.log(data)
