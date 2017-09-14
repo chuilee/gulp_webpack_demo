@@ -30,6 +30,7 @@
     "babel": "^6.5.2",
     "babel-core": "^6.18.2",
     "babel-loader": "^7.1.1",
+    "babel-plugin-transform-async-to-module-method": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-latest": "^6.16.0",
     "babel-register": "^6.18.0",
@@ -54,6 +55,12 @@
     "pug": "^2.0.0-rc.3",
     "pug-html-loader": "^1.1.5",
     "pug-loader": "^2.3.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
   },
   "keywords": [
     "es6"

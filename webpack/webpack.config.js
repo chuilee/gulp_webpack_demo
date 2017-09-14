@@ -14,7 +14,7 @@ module.exports = {
   },
   module: {
     noParse(content) {
-      return /jquery/.test(content);
+      return /jquery|loadsh/.test(content);
     },
     rules: [{
       test: /\.jsx?$/,
@@ -34,7 +34,7 @@ module.exports = {
       chunks: ['common', 'index'],
       title: 'My App',
       filename: '../index.html',
-      template: 'src/templates/index.html',
+      template: 'src/templates/main.pug',
       minify: {
         minifyJS: true,
       },

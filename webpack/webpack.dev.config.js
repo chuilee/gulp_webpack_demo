@@ -19,7 +19,14 @@ module.exports = {
     },
     rules: [{
       test: /\.jsx?$/,
-      use: ['babel-loader', 'eslint-loader'],
+      use: ['babel-loader'],
+    }, {
+      enforce: 'pre',
+      test: /\.jsx?$/,
+      loader: 'eslint-loader',
+      options: {
+        configFile: path.resolve(__dirname, '../.eslintrc'),
+      },
     }, {
       test: /\.pug$/,
       use: ['pug-loader'],
@@ -31,6 +38,7 @@ module.exports = {
     compress: true,
     inline: true,
     publicPath: '/',
+    disableHostCheck: true,
     host: '0.0.0.0',
     port: 3000,
   },
