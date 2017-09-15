@@ -15,7 +15,7 @@ module.exports = {
   },
   module: {
     noParse(content) {
-      return /jquery/.test(content);
+      return /(jquery|lodash)$/.test(content);
     },
     rules: [{
       test: /\.jsx?$/,
@@ -23,13 +23,22 @@ module.exports = {
     }, {
       enforce: 'pre',
       test: /\.jsx?$/,
-      loader: 'eslint-loader',
-      options: {
-        configFile: path.resolve(__dirname, '../.eslintrc'),
-      },
+      // loader: 'eslint-loader',
+      // options: {
+      //   configFile: path.resolve(__dirname, '../.eslintrc'),
+      // },
     }, {
       test: /\.pug$/,
       use: ['pug-loader'],
+    }, {
+      test: /\.(jpe?g|png|gif)$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[hash:7].[ext]',
+        },
+      }],
     }],
   },
   devServer: {

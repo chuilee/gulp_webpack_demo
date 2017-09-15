@@ -22,6 +22,15 @@ module.exports = {
     }, {
       test: /\.pug$/,
       use: ['pug-loader'],
+    }, {
+      test: /\.(jpe?g|png|gif)$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[hash:7].[ext]',
+        },
+      }],
     }],
   },
   plugins: [
