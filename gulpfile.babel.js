@@ -4,7 +4,7 @@ const $ = require('gulp-load-plugins')();
 const config = require('./config');
 // const del = require('del')
 const webpackStream = require('webpack-stream');
-const webpackConfig = require('./webpack/webpack.config');
+const webpackConfig = require('./webpack/webpack.dev.config');
 const webpack = require('webpack');
 const path = require('path');
 
