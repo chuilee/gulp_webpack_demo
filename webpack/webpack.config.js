@@ -14,7 +14,7 @@ module.exports = {
   },
   module: {
     noParse(content) {
-      return /jquery/.test(content);
+      return /jquery|loadsh/.test(content);
     },
     rules: [{
       test: /\.jsx?$/,
@@ -22,6 +22,15 @@ module.exports = {
     }, {
       test: /\.pug$/,
       use: ['pug-loader'],
+    }, {
+      test: /\.(jpe?g|png|gif)$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: '[name].[hash:7].[ext]',
+        },
+      }],
     }],
   },
   plugins: [
@@ -34,7 +43,7 @@ module.exports = {
       chunks: ['common', 'index'],
       title: 'My App',
       filename: '../index.html',
-      template: 'src/templates/index.html',
+      template: 'src/templates/main.pug',
       minify: {
         minifyJS: true,
       },

@@ -1,8 +1,18 @@
 {
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
     "camelcase": 1,
     "comma-dangle": 2,
     "quotes": 0,
-    "semi": 0
+    "semi": 1
   }
 }

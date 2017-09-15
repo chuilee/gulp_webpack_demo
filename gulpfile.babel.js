@@ -64,7 +64,12 @@ gulp.task('babel', ['eslint'], () => {
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel({
-      presets: ['env'],
+      presets: ['env', {
+        targets: {
+          browsers: ['last 2 versions', 'safari >= 7'],
+          node: 'current',
+        },
+      }],
     }))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest(config.gulp.jsDir))

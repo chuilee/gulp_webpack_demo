@@ -1,3 +1,5 @@
 {
-  "presets": ["latest"]
+  "presets": ["latest", ["env", {
+    "node": "current"
+  }]]
 }
